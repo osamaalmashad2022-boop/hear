@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="متاهة الضرب السحرية - لعبة تعليمية تفاعلية لتعليم جداول الضرب للأطفال ضعاف السمع بطريقة ممتعة وبصرية">
+  <title>متاهة الضرب السحرية ✨</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ── Landing Page Specific ── */
+    .landing-container {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: var(--space-xl) var(--space-lg);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: var(--space-3xl) 0 var(--space-xl);
+      max-width: 700px;
+    }
+
+    .hero-icon {
+      font-size: 4rem;
+      margin-bottom: var(--space-md);
+      animation: float 3s ease-in-out infinite;
+      display: inline-block;
+    }
+
+    .hero-characters {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-xl);
+      margin: var(--space-xl) 0;
+      flex-wrap: wrap;
+    }
+
+    .character-card {
+      text-align: center;
+      animation: slideUp 0.8s var(--ease-out) backwards;
+    }
+
+    .character-card:nth-child(2) { animation-delay: 0.2s; }
+
+    .character-avatar {
+      width: 90px;
+      height: 90px;
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      margin: 0 auto var(--space-sm);
+      position: relative;
+    }
+
+    .character-avatar.maha {
+      background: linear-gradient(135deg, #f472b6, #c084fc);
+      box-shadow: 0 0 25px rgba(244, 114, 182, 0.4);
+    }
+
+    .character-avatar.zeki {
+      background: linear-gradient(135deg, var(--blue-500), var(--gold-500));
+      box-shadow: 0 0 25px rgba(59, 130, 246, 0.4);
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .character-name {
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: var(--purple-300);
+    }
+
+    .character-role {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* Sections */
+    .section {
+      width: 100%;
+      max-width: 800px;
+      margin-bottom: var(--space-2xl);
+    }
+
+    /* Table Grid */
+    .tables-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-md);
+    }
+
+    .table-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .table-card .table-number {
+      font-size: 2.5rem;
+      font-weight: 900;
+      display: block;
+      margin-bottom: var(--space-xs);
+      transition: transform var(--transition-normal);
+    }
+
+    .table-card:hover .table-number {
+      transform: scale(1.15);
+    }
+
+    .table-card .table-label {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+    }
+
+    .table-card.active .table-number {
+      color: var(--gold-400);
+    }
+
+    /* Difficulty */
+    .difficulty-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-md);
+    }
+
+    .difficulty-btn {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .difficulty-btn .diff-emoji {
+      font-size: 2rem;
+      display: block;
+      margin-bottom: var(--space-sm);
+    }
+
+    .difficulty-btn .diff-name {
+      font-size: 1.2rem;
+      font-weight: 800;
+      display: block;
+      margin-bottom: var(--space-xs);
+    }
+
+    .difficulty-btn .diff-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .difficulty-btn.active .diff-name {
+      color: var(--gold-400);
+    }
+
+    /* Start Button */
+    .start-section {
+      text-align: center;
+      margin: var(--space-2xl) 0;
+    }
+
+    #startBtn {
+      opacity: 0.4;
+      pointer-events: none;
+      transition: all var(--transition-slow);
+      font-size: 1.5rem;
+      padding: var(--space-lg) var(--space-3xl);
+    }
+
+    #startBtn.ready {
+      opacity: 1;
+      pointer-events: all;
+      animation: pulse 2s ease-in-out infinite, pulseGlow 2s ease-in-out infinite;
+    }
+
+    .start-hint {
+      margin-top: var(--space-md);
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    /* Instructions Button */
+    #instructionsBtn {
+      margin-top: var(--space-lg);
+    }
+
+    /* Instructions Overlay Content */
+    .instructions-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-md);
+      margin: var(--space-lg) 0;
+      text-align: center;
+    }
+
+    .instruction-item {
+      padding: var(--space-lg);
+      background: var(--glass-bg);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--glass-border);
+    }
+
+    .instruction-icon {
+      font-size: 2.5rem;
+      margin-bottom: var(--space-sm);
+      display: block;
+    }
+
+    .instruction-text {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* Footer */
+    .landing-footer {
+      text-align: center;
+      padding: var(--space-xl) 0;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .landing-footer .heart { color: #f43f5e; }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .tables-grid { grid-template-columns: repeat(2, 1fr); }
+      .difficulty-grid { grid-template-columns: 1fr; }
+      .hero { padding: var(--space-xl) 0 var(--space-lg); }
+      .instructions-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Background -->
+  <div class="magic-bg"></div>
+  <div class="floating-symbols"></div>
+
+  <div class="landing-container">
+    <!-- Hero -->
+    <header class="hero" data-animate>
+      <div class="hero-icon">🏰</div>
+      <h1 class="title-magic">متاهة الضرب السحرية</h1>
+      <p class="subtitle-magic">مغامرة تعليمية ممتعة لتعلم جداول الضرب! 🧮✨</p>
+
+      <div class="hero-characters">
+        <div class="character-card">
+          <div class="character-avatar maha">👧🏻</div>
+          <div class="character-name">ماها</div>
+          <div class="character-role">المستكشفة الشجاعة</div>
+        </div>
+        <div class="character-card">
+          <div class="character-avatar zeki">🤖</div>
+          <div class="character-name">زكي</div>
+          <div class="character-role">المساعد الذكي</div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Table Selection -->
+    <section class="section" data-animate>
+      <h2 class="section-title">🔢 اختر جدول الضرب</h2>
+      <div class="tables-grid">
+        <div class="selection-card table-card" data-table="2">
+          <span class="table-number">2️⃣</span>
+          <span class="table-label">جدول ٢</span>
+        </div>
+        <div class="selection-card table-card" data-table="3">
+          <span class="table-number">3️⃣</span>
+          <span class="table-label">جدول ٣</span>
+        </div>
+        <div class="selection-card table-card" data-table="4">
+          <span class="table-number">4️⃣</span>
+          <span class="table-label">جدول ٤</span>
+        </div>
+        <div class="selection-card table-card" data-table="5">
+          <span class="table-number">5️⃣</span>
+          <span class="table-label">جدول ٥</span>
+        </div>
+        <div class="selection-card table-card" data-table="6">
+          <span class="table-number">6️⃣</span>
+          <span class="table-label">جدول ٦</span>
+        </div>
+        <div class="selection-card table-card" data-table="7">
+          <span class="table-number">7️⃣</span>
+          <span class="table-label">جدول ٧</span>
+        </div>
+        <div class="selection-card table-card" data-table="8">
+          <span class="table-number">8️⃣</span>
+          <span class="table-label">جدول ٨</span>
+        </div>
+        <div class="selection-card table-card" data-table="9">
+          <span class="table-number">9️⃣</span>
+          <span class="table-label">جدول ٩</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Difficulty Selection -->
+    <section class="section" data-animate>
+      <h2 class="section-title">⚡ اختر مستوى الصعوبة</h2>
+      <div class="difficulty-grid">
+        <div class="selection-card difficulty-btn" data-difficulty="easy">
+          <span class="diff-emoji">🟢</span>
+          <span class="diff-name">سهل</span>
+          <span class="diff-desc">٥ مسائل • مجموعات بصرية</span>
+        </div>
+        <div class="selection-card difficulty-btn" data-difficulty="medium">
+          <span class="diff-emoji">🟡</span>
+          <span class="diff-name">متوسط</span>
+          <span class="diff-desc">٨ مسائل • مجموعات + اختيارات</span>
+        </div>
+        <div class="selection-card difficulty-btn" data-difficulty="hard">
+          <span class="diff-emoji">🔴</span>
+          <span class="diff-name">صعب</span>
+          <span class="diff-desc">١٠ مسائل • اختيار الإجابة</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Start Button -->
+    <section class="start-section" data-animate>
+      <button class="btn btn-success btn-xl" id="startBtn" disabled>
+        🚀 ابدأ المغامرة!
+      </button>
+      <p class="start-hint">اختر جدول الضرب ومستوى الصعوبة أولاً ⬆️</p>
+    </section>
+
+    <!-- Instructions Button -->
+    <button class="btn btn-primary" id="instructionsBtn" data-animate>
+      📖 كيف ألعب؟
+    </button>
+
+    <!-- Footer -->
+    <footer class="landing-footer" data-animate>
+      <p>صنع بكل <span class="heart">❤️</span> لأطفالنا الأبطال</p>
+      <p>متاهة الضرب السحرية © 2026</p>
+    </footer>
+  </div>
+
+  <!-- Instructions Overlay -->
+  <div class="overlay" id="instructionsOverlay">
+    <div class="overlay-content">
+      <h2 class="section-title" style="margin-bottom: var(--space-lg);">📖 كيف ألعب؟</h2>
+      <div class="instructions-grid">
+        <div class="instruction-item">
+          <span class="instruction-icon">🔢</span>
+          <p class="instruction-text">اختر جدول الضرب الذي تريد تعلمه</p>
+        </div>
+        <div class="instruction-item">
+          <span class="instruction-icon">💎</span>
+          <p class="instruction-text">اضغط على الأحجار الكريمة لوضعها على القواعد</p>
+        </div>
+        <div class="instruction-item">
+          <span class="instruction-icon">✅</span>
+          <p class="instruction-text">اكمل كل مجموعة<br>لفتح البوابة السحرية!</p>
+        </div>
+        <div class="instruction-item">
+          <span class="instruction-icon">⭐</span>
+          <p class="instruction-text">اجمع النقاط واحصل على ثلاث نجوم!</p>
+        </div>
+      </div>
+      <button class="btn btn-primary" id="closeInstructions">👍 فهمت!</button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

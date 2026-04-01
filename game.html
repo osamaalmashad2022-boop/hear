@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="متاهة الضرب السحرية - مستوى اللعب">
+  <title>متاهة الضرب السحرية — اللعب 🎮</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="game.css">
+</head>
+<body>
+  <!-- Maze-themed Background -->
+  <div class="magic-bg maze-theme"></div>
+  <div class="maze-wall maze-wall-left"></div>
+  <div class="maze-wall maze-wall-right"></div>
+  <canvas id="particleCanvas"></canvas>
+
+  <!-- Feedback Banner -->
+  <div class="feedback-banner" id="feedbackBanner"></div>
+
+  <div class="game-container">
+    <!-- Top Bar -->
+    <header class="game-top-bar">
+      <div class="hearts-container" id="heartsContainer">
+        <!-- Hearts rendered by JS -->
+      </div>
+      <div class="stat-item">
+        <span>⭐ النتيجة:</span>
+        <span class="stat-value" id="scoreValue">0</span>
+      </div>
+      <div class="stat-item">
+        <span>📚</span>
+        <span id="levelLabel">جدول ٣ - سهل</span>
+      </div>
+      <div class="stat-item">
+        <span>📝 المسألة:</span>
+        <span class="stat-value" id="questionNum">1 / 5</span>
+      </div>
+      <button class="back-btn" id="backBtn">✖ رجوع</button>
+    </header>
+
+    <!-- Maze Path -->
+    <div class="maze-path-wrapper">
+      <div class="maze-path" id="mazePath">
+        <!-- Nodes rendered by JS -->
+      </div>
+    </div>
+
+    <!-- Main Game Area -->
+    <main class="game-main" id="gameMain">
+      <!-- Stone Gate with Question -->
+      <div class="stone-gate">
+        <div class="question-container">
+          <div class="question-frame">
+            <span class="question-number" id="numA">3</span>
+            <span class="question-operator">×</span>
+            <span class="question-number" id="numB">4</span>
+            <span class="question-equals">=</span>
+            <span id="answerDisplay">
+              <span class="question-mark">❓</span>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Visual Hint (Easy/Medium) -->
+      <div class="visual-hint hidden" id="visualHint">
+        <!-- Groups rendered by JS -->
+      </div>
+
+      <!-- Answer Choices — ALWAYS shown for challenge -->
+      <div class="answer-choices" id="choicesArea">
+        <!-- Choices rendered by JS -->
+      </div>
+
+      <!-- Timer (Hard mode only) -->
+      <div class="timer-container hidden" id="timerContainer">
+        <div class="timer-label">
+          <span>⏱️ الوقت</span>
+          <span id="timerText">15</span>
+        </div>
+        <div class="timer-bar">
+          <div class="timer-fill" id="timerFill" style="width: 100%"></div>
+        </div>
+      </div>
+
+      <!-- Zeki Assistant -->
+      <div class="zeki-container">
+        <div class="zeki-avatar">🤖</div>
+        <div class="zeki-speech" id="zekiSpeech">
+          🎯 اختر الإجابة الصحيحة لفتح البوابة!
+        </div>
+      </div>
+
+      <!-- Progress Bar -->
+      <div class="game-progress">
+        <div class="game-progress-label">
+          <span>🏰 التقدم في المتاهة</span>
+          <span id="progressText">0 / 5</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="levels.js"></script>
+  <script src="particles.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
