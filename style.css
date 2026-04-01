@@ -413,6 +413,77 @@ a {
   transform: scale(1) translateY(0);
 }
 
+/* ── Instructions Grid ── */
+.instructions-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-md);
+  margin: var(--space-xl) 0;
+}
+
+.instruction-item {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  text-align: center;
+  transition: all var(--transition-normal);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.instruction-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--purple-400);
+  transform: translateY(-5px);
+  box-shadow: var(--glow-purple);
+}
+
+.instruction-step {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background: linear-gradient(135deg, var(--gold-400), var(--gold-500));
+  color: var(--bg-primary);
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 0.9rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.instruction-icon {
+  font-size: 2.5rem;
+  margin-bottom: var(--space-xs);
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.2));
+  transition: transform var(--transition-normal);
+}
+
+.instruction-item:hover .instruction-icon {
+  transform: scale(1.2) rotate(5deg);
+}
+
+.instruction-title {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--purple-300);
+  margin-bottom: var(--space-xs);
+}
+
+.instruction-text {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
 /* ── Badge ── */
 .badge {
   display: inline-flex;

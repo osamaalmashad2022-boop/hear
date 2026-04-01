@@ -190,34 +190,7 @@
       margin-top: var(--space-lg);
     }
 
-    /* Instructions Overlay Content */
-    .instructions-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: var(--space-md);
-      margin: var(--space-lg) 0;
-      text-align: center;
-    }
-
-    .instruction-item {
-      padding: var(--space-lg);
-      background: var(--glass-bg);
-      border-radius: var(--radius-md);
-      border: 1px solid var(--glass-border);
-    }
-
-    .instruction-icon {
-      font-size: 2.5rem;
-      margin-bottom: var(--space-sm);
-      display: block;
-    }
-
-    .instruction-text {
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: var(--text-secondary);
-      line-height: 1.5;
-    }
+    /* Styles for instructions are now in style.css */
 
     /* Footer */
     .landing-footer {
@@ -348,27 +321,39 @@
 
   <!-- Instructions Overlay -->
   <div class="overlay" id="instructionsOverlay">
-    <div class="overlay-content">
+    <div class="overlay-content" style="max-width: 650px;">
       <h2 class="section-title" style="margin-bottom: var(--space-lg);">📖 كيف ألعب؟</h2>
       <div class="instructions-grid">
+        <!-- Step 1 -->
         <div class="instruction-item">
-          <span class="instruction-icon">🔢</span>
-          <p class="instruction-text">اختر جدول الضرب الذي تريد تعلمه</p>
+          <div class="instruction-step">1</div>
+          <span class="instruction-icon">🎯</span>
+          <h3 class="instruction-title">اختر التحدي</h3>
+          <p class="instruction-text">اختر جدول الضرب ومستوى الصعوبة الذي يناسبك</p>
         </div>
+        <!-- Step 2 -->
         <div class="instruction-item">
-          <span class="instruction-icon">💎</span>
-          <p class="instruction-text">اضغط على الأحجار الكريمة لوضعها على القواعد</p>
+          <div class="instruction-step">2</div>
+          <span class="instruction-icon">🤖</span>
+          <h3 class="instruction-title">حل مع زكي</h3>
+          <p class="instruction-text">استخدم التلميحات البصرية لمساعدة زكي في إيجاد الحل</p>
         </div>
+        <!-- Step 3 -->
         <div class="instruction-item">
-          <span class="instruction-icon">✅</span>
-          <p class="instruction-text">اكمل كل مجموعة<br>لفتح البوابة السحرية!</p>
+          <div class="instruction-step">3</div>
+          <span class="instruction-icon">❤️</span>
+          <h3 class="instruction-title">انتبه لقلوبك</h3>
+          <p class="instruction-text">لديك ٣ محاولات فقط.. فكر جيداً قبل اختيار الإجابة</p>
         </div>
+        <!-- Step 4 -->
         <div class="instruction-item">
-          <span class="instruction-icon">⭐</span>
-          <p class="instruction-text">اجمع النقاط واحصل على ثلاث نجوم!</p>
+          <div class="instruction-step">4</div>
+          <span class="instruction-icon">🏰</span>
+          <h3 class="instruction-title">طريق القلعة</h3>
+          <p class="instruction-text">اجب بشكل صحيح لتصل "ماها" بسلام إلى نهاية المتاهة</p>
         </div>
       </div>
-      <button class="btn btn-primary" id="closeInstructions">👍 فهمت!</button>
+      <button class="btn btn-primary btn-lg" id="closeInstructions" style="width: 100%;">👍 فهمت.. دعنا نبدأ!</button>
     </div>
   </div>
 
